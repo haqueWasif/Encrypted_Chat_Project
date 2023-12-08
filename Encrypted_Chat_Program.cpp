@@ -3,13 +3,26 @@ using namespace std;
 
 void encrypt(string &s){
     for(auto &ch : s){
-        ch++; 
+        if(ch >= 'A' && ch <= 'Z'){
+            ch = 'Z' - (ch - 'A');
+        }
+        else if(ch >= 'a' && ch <= 'z'){
+            ch = 'z' - (ch - 'a');
+        }
+        ch++;
     }
 }
 
 void decrypt(string &s){
     for(auto &ch : s){
         ch--;
+        if(ch >= 'A' && ch <= 'Z'){
+            ch = 'A' + ('Z' - ch);
+        }
+        else if(ch >= 'a' && ch <= 'z'){
+            ch = 'a' + ('z' - ch);
+        } 
+        
     }
 }
 
