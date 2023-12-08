@@ -26,40 +26,56 @@ void decrypt(string &s){
     }
 }
 
+void process(int user){
+    string s;
+
+    cin.ignore();
+    getline(cin, s);
+
+    stringstream ss(s);
+        
+    vector<string> v;
+    
+    string word;
+    while(ss >> word){
+        v.push_back(word);
+    }
+    for(auto &val : v){
+        reverse(val.begin(), val.end());
+        if(user == 1) encrypt(val);
+        else decrypt(val);
+    }
+    
+    cout << endl << "Output: " << endl;
+    for(int i=v.size()-1; i>=0; i--){
+        cout << v[i] << " ";
+    }
+    cout << endl;
+    cout << endl;
+
+}
+
 int main(){
     ios_base :: sync_with_stdio(false);
     cin.tie(NULL);
     
-    string s;
+    cout << "1.Encrypt\n";
+    cout << "2.Decrypt\n\n" << flush;
+    
+    while(true){
+        cout << "Select Operation: " << flush;
+        
+        int user;
+        cin >> user;
 
-    cout << "Select Operation: " << endl;
-    cout << "1.Encrypt" << endl;
-    cout << "2.Decrypt" << endl;
+        if(user != 1 && user != 2) break;
 
-    int user;
-    cin >> user;
-
-    while(getline(cin, s)){
-        stringstream ss(s);
-
-        vector<string> v;
-
-        string word;
-        while(ss >> word){
-            v.push_back(word);
-        }
-
-        for(auto &val : v){
-            reverse(val.begin(), val.end());
-            if(user == 1) encrypt(val);
-            else decrypt(val);
-        }
-
-        for(int i=v.size()-1; i>=0; i--){
-            cout << v[i] << " ";
-        }
-        cout << endl;
+        cout << "\nInput: " << endl;
+        
+        process(user);
     }
+
+    
 
 
     return 0;
